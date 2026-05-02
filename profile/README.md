@@ -5,13 +5,7 @@ Lightweight eBPF-based observability for AI/LLM workloads. Kernel-level visibili
 ## Projects
 
 ### 🐝 [honeybeepf-llm](https://github.com/honeybee-studio/honeybeepf-llm) — LLM API tracing
-Production-ready agent that hooks `libssl` via uprobes to capture LLM API calls (OpenAI, Anthropic, Google) and emit per-process token / latency metrics. No SDK, no proxy, no app changes.
-
-### 🛣️ Roadmap
-
-- **honeybeepf-gpu** — Per-process GPU cost attribution. eBPF on `libcuda.so` + NVML power telemetry → real-time `₩/min` overlay per training job. Energy-aware MLOps.
-- **honeybeepf-anonymizer** — In-flight PII redaction on captured LLM traffic. Compliance-ready (GDPR, internal data policy).
-- **honeybeepf** — Enterprise distribution. License-gated bundle of the above with verifier and unified deploy.
+Production-ready agent that hooks `libssl` via uprobes to capture LLM API calls (OpenAI, Anthropic, Google, plus configurable custom providers) and emit per-process token / latency metrics. No SDK, no proxy, no app changes.
 
 ## Why eBPF
 
