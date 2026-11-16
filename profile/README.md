@@ -13,8 +13,8 @@ OpenTelemetry.
 
 - **Cost per team** — tokens and estimated USD by namespace, pod, workload and model, with a bundled Grafana dashboard
   and Prometheus alerts for daily budgets, spend spikes and calls that were not recorded.
-- **11 provider APIs** — OpenAI, Anthropic, Gemini, Amazon Bedrock, Azure OpenAI, Google Vertex AI, Meta, and the
-  OpenAI-compatible APIs of Groq, DeepSeek, Together, Fireworks, OpenRouter, Mistral and Cerebras; JSON and streaming.
+- **Providers** — OpenAI, Anthropic, Gemini, Amazon Bedrock, Azure OpenAI, Google Vertex AI and Meta, plus
+  OpenAI-compatible APIs such as Groq, DeepSeek, Mistral, Together and OpenRouter; JSON and streaming.
 - **Light** — about 53 µs of agent CPU per LLM call, measured ([benchmark](https://github.com/honeybee-studio/honeybeepf-llm/blob/main/docs/benchmark.md)).
 - **Tested kernels** — Linux 5.10 to 7.2 and RHEL 8.10 / 9.6 / 9.7 in CI.
 - **Signed releases** — container image and Helm chart signed with cosign, listed on
