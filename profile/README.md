@@ -1,18 +1,28 @@
 # Honeybee Studio
 
-Lightweight eBPF-based observability for AI/LLM workloads. Kernel-level visibility into what models cost, where they spend, and what they leak — without code changes.
+eBPF observability for LLM workloads. We read LLM API calls at the TLS layer on each node and turn them into tokens
+and estimated dollars per Kubernetes namespace, pod and model, with no code changes, proxy or SDK.
 
 ## Projects
 
-### 🐝 [honeybeepf-llm](https://github.com/honeybee-studio/honeybeepf-llm) — LLM API tracing
-Production-ready agent that hooks `libssl` via uprobes to capture LLM API calls (OpenAI, Anthropic, Google, plus configurable custom providers) and emit per-process token / latency metrics. No SDK, no proxy, no app changes.
+### 🐝 [honeybeepf-llm](https://github.com/honeybee-studio/honeybeepf-llm)
 
-## Why eBPF
+A Rust eBPF agent that runs as a DaemonSet. It attaches uprobes to the TLS code apps already use, parses the
+plaintext HTTP of calls to LLM providers, and exports token usage, cost, request counts and latency over
+OpenTelemetry.
 
-- **Zero app changes** — instrument any binary, any framework, any language.
-- **Low overhead** — kernel-side capture, userspace processing.
-- **Standard pipelines** — OpenTelemetry export, Prometheus metrics, K8s DaemonSet.
+- **Cost per team** — tokens and estimated USD by namespace, pod, workload and model, with a bundled Grafana dashboard
+  and Prometheus alerts for budgets and missed calls.
+- **Providers** — OpenAI, Anthropic, Gemini, Amazon Bedrock, Azure OpenAI, Google Vertex AI and Meta, plus
+  OpenAI-compatible APIs such as Groq, DeepSeek, Mistral, Together and OpenRouter; JSON and streaming.
+- **Light** — agent CPU, memory and latency overhead measured with and without the agent ([benchmark](https://github.com/honeybee-studio/honeybeepf-llm/blob/main/docs/benchmark.md)).
+- **Signed releases** — container image and Helm chart signed with cosign, listed on
+  [Artifact Hub](https://artifacthub.io/packages/helm/honeybeepf-llm/honeybeepf-llm).
+
+```bash
+helm install honeybeepf-llm oci://ghcr.io/honeybee-studio/charts/honeybeepf-llm -n honeybeepf --create-namespace
+```
 
 ## Stack
 
-Rust · [Aya](https://aya-rs.dev) · BPF CO-RE · Kubernetes · OpenTelemetry
+Rust · [Aya](https://aya-rs.dev) · BPF CO-RE · Kubernetes · OpenTelemetry · Prometheus
